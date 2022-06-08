@@ -126,7 +126,7 @@ run.scWGCNA = function(p.cells,
     # z.1.'=what's the size of the first cluster?
     for (i in x) {
       for (j in y) {
-        sink("aux")
+        sink(".aux")
         z=table(dynamicTreeCut::cutreeDynamic(dendro = geneTree,  method="tree", minClusterSize = i, deepSplit = T, cutHeight = j, verbose = 0))
         sink(NULL)
         v=data.frame(i,j,dim(z),names(z[1]),unname(z[1]))
@@ -229,7 +229,7 @@ run.scWGCNA = function(p.cells,
     
     # Calculate the module membership
     geneModuleMembership = as.data.frame(WGCNA::signedKME(datExpr, MEs))
-    MMPvalue = as.data.frame(WGCNA::corPvalueStudent(as.matrix(geneModuleMembership), nrow(datExpr)))
+    MMPvalue = as.data.frames(WGCNA::corPvalueStudent(as.matrix(geneModuleMembership), nrow(datExpr)))
     
     # We're gonna make a list, where we keep the genes that are significantly associated with each module
     x=c()
